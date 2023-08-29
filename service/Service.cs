@@ -18,7 +18,7 @@ public class Service
     }
     
        
-    public IEnumerable<Articles> GetAllArticles()
+    public IEnumerable<NewsFeedItem> GetAllArticles()
     {
         try
         {
@@ -30,4 +30,8 @@ public class Service
         }
     }
 
+    public IEnumerable<Articles> GetArticleById()
+    {
+        return _repository.GetArticleById();
+    }
 }

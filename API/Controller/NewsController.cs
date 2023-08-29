@@ -24,9 +24,17 @@ public class NewsController : ControllerBase
     
     [HttpGet]
     [Route("/api/feed")]
-    public IEnumerable<Articles> GetArticles()
+    public IEnumerable<NewsFeedItem> GetArticles()
     {
         return _service.GetAllArticles();
     }
+
+    [HttpGet]
+    [Route("/api/articles/{articleId}")]
+    public IEnumerable<Articles> GetArticleById()
+    {
+        return _service.GetArticleById();
+    }
+    
     
 }

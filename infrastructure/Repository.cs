@@ -25,12 +25,20 @@ RETURNING *;";
         }
     }
 
-    public IEnumerable<Articles> NewsFeedItem()
+    public IEnumerable<NewsFeedItem> GetAllArticles()
     {
-        var sql = $@"select * from news.articles;";
+        var sql = $@"
+SELECT articleid, headline, left(body, 50) body, articleimgurl FROM news.articles;";
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.Query<Articles>(sql);
+            return conn.Query<NewsFeedItem>(sql);
         }
+    }
+
+    public IEnumerable<Articles> GetArticleById()
+    {
+        var sql $@"
+
+"
     }
 }
