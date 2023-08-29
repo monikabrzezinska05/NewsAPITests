@@ -35,10 +35,45 @@ SELECT articleid, headline, left(body, 50) body, articleimgurl FROM news.article
         }
     }
 
-    public IEnumerable<Articles> GetArticleById()
+    public Articles GetArticleById(int articleId)
     {
-        var sql $@"
+        var sql = $@"
+SELECT * FROM news.articles Where ArticleId = @articleid;";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.QueryFirst<Articles>(sql, articleId);
+        }
+    }
 
-"
+    public void DeleteArticleById(int articleId)
+    {
+        var sql = $@"
+DELETE FROM news.articles Where ArticleID = @articleid;";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            conn.Execute(sql, new { articleId });
+        }
+    }
+
+    public Articles UpdateArticles(int articleId, Articles articles)
+    {
+        var sql = $@"
+UPDATE news.articles SET headline = @headline, body = @body, articleimgurl = @articleimgurl, author = @author 
+WHERE articleid = @articleid 
+RETURNING articleid, headline, body, articleimgurl, author;";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.QueryFirst<Articles>(sql, new {articles.Headline, articles.Body, articles.ArticleImgUrl, articles.Author, articleId});
+        }
+    }
+
+    public IEnumerable<Articles> SearchArticleItem(string searchterm, int pagesize)
+    {
+        var sql = $@"
+SELECT * FROM news.articles WHERE body LIKE '%' || @searchterm || '%' OR headline LIKE '%' || @searchterm || '%' LIMIT @pagesize;";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.Query<Articles>(sql, new { searchterm, pagesize });
+        }
     }
 }

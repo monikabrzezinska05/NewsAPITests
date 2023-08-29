@@ -9,6 +9,7 @@ public class Articles
     public string Headline { get; set; }
     [MaxLength(1000)]
     public string Body { get; set; }
+    [AllowedValues("Bob", "Rob", "Lob", "Dob")]
     public string Author { get; set; }
     public string ArticleImgUrl { get; set; }
 }

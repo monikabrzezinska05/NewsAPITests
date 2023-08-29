@@ -31,10 +31,34 @@ public class NewsController : ControllerBase
 
     [HttpGet]
     [Route("/api/articles/{articleId}")]
-    public IEnumerable<Articles> GetArticleById()
+    public Articles GetArticleById([FromRoute] int articleId)
     {
-        return _service.GetArticleById();
+        return _service.GetArticleById(articleId);
     }
-    
-    
+
+    [HttpDelete]
+    [Route("/api/articles/{articleId}")]
+    public void DeleteArticleById([FromRoute] int articleId)
+    {
+        _service.DeleteArticleById(articleId);
+    }
+
+    [HttpPut]
+    [Route("/api/articles/{articleId}")]
+    public Articles UpdateArticles([FromRoute] int articleId, [FromBody] Articles article)
+    {
+        return _service.UpdateArticles(articleId, article);
+    }
+
+    [HttpGet]
+    [Route("/api/articles")]
+    public IEnumerable<Articles> SearchArticleItem([FromQuery] string searchterm, [FromQuery] int pagesize)
+    {
+        if (searchterm.Length >= 3)
+        {
+            return _service.SearchArticleItem(searchterm, pagesize);
+        }
+
+        throw new Exception("Not working for you");
+    }
 }

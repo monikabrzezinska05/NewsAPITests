@@ -30,8 +30,24 @@ public class Service
         }
     }
 
-    public IEnumerable<Articles> GetArticleById()
+    public Articles GetArticleById(int articleId)
     {
-        return _repository.GetArticleById();
+        return _repository.GetArticleById(articleId);
+    }
+
+
+    public void DeleteArticleById(int articleId)
+    {
+        _repository.DeleteArticleById(articleId);
+    }
+
+    public Articles UpdateArticles(int articleId, Articles articles)
+    {
+        return _repository.UpdateArticles(articleId, articles);
+    }
+
+    public IEnumerable<Articles> SearchArticleItem(string searchterm, int pagesize)
+    {
+        return _repository.SearchArticleItem(searchterm, pagesize);
     }
 }
