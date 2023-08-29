@@ -15,18 +15,18 @@ public class NewsController : ControllerBase
         _service = service;
     }
 
-    [HttpGet]
-    [Route("/api/articles")]
-    public IEnumerable<Articles> GetArticles()
-    {
-        return _service.GetAllArticles();
-    }
-
     [HttpPost]
     [Route("/api/articles")]
     public Articles PostNews(Articles articles)
     {
         return _service.CreateArticle(articles);
+    }
+    
+    [HttpGet]
+    [Route("/api/feed")]
+    public IEnumerable<Articles> GetArticles()
+    {
+        return _service.GetAllArticles();
     }
     
 }

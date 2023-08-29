@@ -12,6 +12,12 @@ public class Service
         _repository = repository;
     }
     
+    public Articles CreateArticle(Articles articles)
+    {
+        return _repository.CreateArticle(articles);
+    }
+    
+       
     public IEnumerable<Articles> GetAllArticles()
     {
         try
@@ -22,11 +28,6 @@ public class Service
         {
             throw new Exception("Could not get Articles");
         }
-    }
-    
-    public Articles CreateArticle(Articles articles)
-    {
-        return _repository.CreateArticle(articles);
     }
 
 }

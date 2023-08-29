@@ -25,7 +25,7 @@ RETURNING *;";
         }
     }
 
-    public IEnumerable<Articles> GetAllArticles()
+    public IEnumerable<Articles> NewsFeedItem()
     {
         var sql = $@"select * from news.articles;";
         using (var conn = _dataSource.OpenConnection())
