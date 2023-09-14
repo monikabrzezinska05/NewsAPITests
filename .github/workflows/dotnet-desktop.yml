@@ -30,5 +30,8 @@ jobs:
         run: dotnet new webapi 
 
       - name: Run new webapi
-        run: dotnet run new webapi
+        run: dotnet run 
+
+      - name: Kill api
+        run: kill -9 $(lsof -t -i:5000)
         
