@@ -24,14 +24,16 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: |
+            8.0.x
       # Runs a single command using the runners shell
-      - name: Create new webapi
-        run: dotnet new webapi 
+      - name: run
+        run: cd API && dotnet run & sleep 20 && kill -9 $(lsof -t -i:5000)
+        env:
+          pgconn: ${{secrets.pgconn}}
 
-      - name: Run new webapi
-        run: dotnet run 
 
-      - name: Kill api
-        run: kill -9 $(lsof -t -i:5000)
         
