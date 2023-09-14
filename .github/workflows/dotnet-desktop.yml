@@ -26,5 +26,5 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Create test project
-        run: dotnet new nunit
+      - name: Create new webapi
+        run: dotnet run api
