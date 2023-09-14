@@ -27,4 +27,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Create new webapi
+        run: dotnet create webapi 
+
+      - name: Run new webapi
         run: dotnet run api
+        
